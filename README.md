@@ -15,8 +15,6 @@
 - Tahun Akademik:2026/2027
 
 
-Sekarang sudah jelas: aplikasi memakai **`localStorage`** (kunci `wf_data`) dengan data awal (seed) di `app.js`. Berikut README yang sudah saya sesuaikan:
-
 
 ## 1. Deskripsi Pengerjaan UTS
 
