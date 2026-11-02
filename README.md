@@ -34,3 +34,16 @@ Sistem Pengguna, Poin & Laporan: Dilengkapi dengan autentikasi hak akses penggun
 uts/: Source code dan file pendukung UTS.
 
 uts/screenshots/: Bukti visual hasil implementasi.
+
+## Cara Menjalankan Aplikasi
+Pastikan Anda telah menginstal dan menjalankan Laragon (server Apache dan MySQL/MariaDB aktif).
+
+Pindahkan atau salin folder washflow ke dalam direktori root Laragon:C:\laragon\www\washflow\
+
+Buat database baru bernama washflow melalui HeidiSQL (buka via tombol Database di Laragon) atau phpMyAdmin.
+
+Impor file struktur database yang berada di lokasi:washflow/database/washflow.sql
+
+Atur koneksi database pada file washflow/config/database.php sesuai dengan konfigurasi Laragon (default: host localhost, user root, password kosong "", database washflow).
+
+Akses aplikasi melalui browser dengan membuka URL otomatis Laragon [http://washflow.test/](http://washflow.test/) atau http://localhost/washflow/.
