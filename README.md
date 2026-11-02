@@ -150,9 +150,3 @@ Atau hapus data situs (site data) lewat pengaturan browser.
 - Label "Pendapatan Hari Ini" di dashboard menjumlahkan semua transaksi berstatus dibayar, belum difilter tanggal.
 - File `print.css` sudah tersedia, tetapi belum ditautkan di halaman HTML mana pun. Tambahkan `<link rel="stylesheet" href="assets/css/print.css">` setelah `style.css` jika ingin gaya cetaknya aktif.
 ````
-
-Beberapa hal yang saya temukan dari file baru dan saya cantumkan sebagai catatan, supaya bisa Anda perbaiki sebelum dikumpulkan:
-- `print.css` belum dipakai oleh halaman mana pun.
-- Tidak ada pengecekan login. Halaman seperti `dashboard.html` bisa dibuka langsung tanpa masuk dulu, dan akan tampil sebagai "Administrator".
-
-Kalau mau, saya bisa tuliskan perbaikan kecil untuk keduanya.
