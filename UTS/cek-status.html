@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WashFlow</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head><body>
+<div class="min-vh-100 py-5" style="background:#f8fafc"><div class="container" style="max-width:560px">
+<h3 class="fw-bold text-center"><i class="bi bi-water text-info"></i> Cek Status Kendaraan</h3>
+<p class="text-center text-muted small">Masukkan kode antrean (mis. WF-001) atau plat nomor.</p>
+<form id="f" class="d-flex gap-2 mb-3"><input id="q" class="form-control input-plat" placeholder="WF-001 / B 1234 ABC" required><button class="btn btn-primary-wf">Cari</button></form>
+<div id="hasil"></div><a href="login.html" class="d-block text-center small mt-4">&larr; Kembali ke login</a></div></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+const ORDER = ['menunggu', 'dicuci', 'selesai', 'dibayar'];
+f.addEventListener('submit', e => {
+  e.preventDefault(); const d = DB.get(), k = q.value.trim().toUpperCase();
+  const a = d.antrean.find(x => x.kode === k || x.plat.toUpperCase() === k);
+  if (!a) { hasil.innerHTML = '<div class="alert alert-warning">Data tidak ditemukan.</div>'; return; }
+  const i = ORDER.indexOf(a.status);
+  hasil.innerHTML = `<div class="card-wf p-3"><div class="fw-bold">${a.kode} — ${a.plat}</div><div class="text-muted small mb-3">${layananOf(d, a.idLayanan).nama}</div>
+    <div class="d-flex justify-content-between text-center">${ORDER.map((s, n) => `<div class="flex-fill"><div class="mx-auto rounded-circle d-flex align-items-center justify-content-center ${n <= i ? 'bg-primary text-white' : 'bg-light text-muted'}" style="width:38px;height:38px">${n < i ? '<i class="bi bi-check-lg"></i>' : n + 1}</div>
+    <div class="small mt-1 ${n === i ? 'fw-bold' : ''}">${STATUS[s][0]}</div></div>`).join('')}</div></div>`;
+});
+</script>
+
+</body></html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WashFlow</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head><body>
+<div id="root"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+const P = Layout.mount('Paket Layanan', 'layanan');
+function render() {
+  const d = DB.get();
+  P.innerHTML = `<div class="card-wf p-3"><div class="d-flex justify-content-between mb-3"><input class="form-control w-50" placeholder="Cari layanan..." onkeyup="cari(this.value)"><button class="btn btn-primary-wf" onclick="form()"><i class="bi bi-plus-lg"></i> Tambah</button></div>
+    <div class="table-responsive"><table id="tb" class="table table-wf align-middle"><thead><tr><th>Nama</th><th>Jenis</th><th>Harga</th><th>Durasi</th><th></th></tr></thead><tbody>
+    ${d.layanan.map(l => `<tr><td>${l.nama}</td><td>${l.jenis}</td><td>${rp(l.harga)}</td><td>${l.durasi} mnt</td><td class="text-nowrap">
+    <button class="btn btn-sm btn-outline-primary" onclick="form(${l.id})"><i class="bi bi-pencil"></i></button> <button class="btn btn-sm btn-outline-danger" onclick="hapus(${l.id})"><i class="bi bi-trash"></i></button></td></tr>`).join('')}</tbody></table></div></div>
+    <div class="modal fade" id="m"><div class="modal-dialog"><form id="f" class="modal-content"><div class="modal-header"><h6 class="modal-title fw-bold">Form Layanan</h6><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body vstack gap-2"><input id="n" class="form-control" placeholder="Nama layanan" required><select id="j" class="form-select"><option>Mobil</option><option>Motor</option></select>
+    <input id="h" type="number" min="1000" class="form-control" placeholder="Harga (Rp)" required><input id="du" type="number" min="5" class="form-control" placeholder="Durasi (menit)" required>
+    <textarea id="de" class="form-control" placeholder="Deskripsi"></textarea></div><div class="modal-footer"><button class="btn btn-primary-wf">Simpan</button></div></form></div></div>`;
+  f.onsubmit = simpan;
+}
+let editId = null;
+function cari(t) { document.querySelectorAll('#tb tbody tr').forEach(r => r.style.display = r.textContent.toLowerCase().includes(t.toLowerCase()) ? '' : 'none'); }
+function form(id) {
+  editId = id || null; const l = id ? DB.get().layanan.find(x => x.id === id) : {nama: '', jenis: 'Mobil', harga: '', durasi: '', deskripsi: ''};
+  n.value = l.nama; j.value = l.jenis; h.value = l.harga; du.value = l.durasi; de.value = l.deskripsi;
+  bootstrap.Modal.getOrCreateInstance(document.getElementById('m')).show();
+}
+function simpan(e) {
+  e.preventDefault(); const d = DB.get(), v = {nama: n.value.trim(), jenis: j.value, harga: +h.value, durasi: +du.value, deskripsi: de.value};
+  if (editId) Object.assign(d.layanan.find(x => x.id === editId), v); else d.layanan.push({id: Math.max(0, ...d.layanan.map(x => x.id)) + 1, ...v});
+  DB.set(d); render();
+  document.querySelectorAll('.modal-backdrop').forEach(b => b.remove()); document.body.classList.remove('modal-open'); document.body.style = '';
+}
+function hapus(id) { if (!confirm('Hapus layanan ini?')) return; const d = DB.get(); d.layanan = d.layanan.filter(x => x.id !== id); DB.set(d); render(); }
+render();
+</script>
+<script src="assets/js/main.js"></script>
+</body></html>
