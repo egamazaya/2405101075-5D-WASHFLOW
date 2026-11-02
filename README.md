@@ -100,12 +100,6 @@ washflow/
 
 ## 4. Petunjuk Menjalankan Aplikasi
 
-**Prasyarat**
-- Browser modern (Chrome, Edge, Firefox, atau Safari).
-- Koneksi internet, karena Bootstrap, Bootstrap Icons, Chart.js, dan font dimuat lewat CDN.
-
-**Langkah-langkah**
-
  gunakan ekstensi **Live Server** di VS Code (klik kanan `index.html` → *Open with Live Server*).
 
 
