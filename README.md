@@ -103,50 +103,15 @@ washflow/
 **Prasyarat**
 - Browser modern (Chrome, Edge, Firefox, atau Safari).
 - Koneksi internet, karena Bootstrap, Bootstrap Icons, Chart.js, dan font dimuat lewat CDN.
-- Tidak perlu instalasi database, PHP, atau Node.js untuk menjalankan aplikasi.
 
 **Langkah-langkah**
 
-1. Ekstrak atau salin seluruh proyek ke satu folder. Pastikan semua file HTML dan folder `assets/` berada dalam folder yang sama.
-2. Jalankan web server lokal (disarankan), misalnya dari dalam folder proyek:
-   ```bash
-   # Python
-   python -m http.server 8000
+ gunakan ekstensi **Live Server** di VS Code (klik kanan `index.html` → *Open with Live Server*).
 
-   # atau Node.js
-   npx serve .
-   ```
-   Alternatif: gunakan ekstensi **Live Server** di VS Code (klik kanan `index.html` → *Open with Live Server*).
-3. Buka `http://localhost:8000` di browser. Anda akan diarahkan otomatis ke halaman login.
-4. Masuk dengan akun demo berikut (atau klik tombol **Demo Admin** / **Demo Kasir**):
 
    | Peran | Username | Password   |
    |-------|----------|------------|
    | Admin | `admin`  | `admin123` |
    | Kasir | `kasir`  | `kasir123` |
 
-**Skenario uji singkat**
 
-1. Login, lalu buka **Input Kendaraan** dan daftarkan satu kendaraan. Kendaraan masuk antrean berstatus *Menunggu*.
-2. Di **Antrean**, klik *Mulai Cuci*, lalu *Selesaikan*.
-3. Di **Kasir**, klik *Bayar*, pilih metode, isi uang diterima, lalu konfirmasi dan cetak nota.
-4. Buka **Pelanggan** untuk melihat poin dan kunjungan bertambah, dan **Dashboard** untuk melihat ringkasan terbaru.
-5. Buka **Cek Status** (dari halaman login atau sidebar) dan cari dengan kode antrean (mis. `WF-001`) atau plat nomor (mis. `B 1234 ABC`).
-
-**Mengembalikan data ke awal**
-
-Data tersimpan di browser. Untuk mengembalikan ke data contoh, buka Console browser (F12) lalu jalankan:
-
-```js
-DB.reset(); location.reload();
-```
-
-Atau hapus data situs (site data) lewat pengaturan browser.
-
-**Catatan dan keterbatasan**
-- Autentikasi hanya simulasi di sisi klien: kredensial ditulis di `login.html`, dan halaman lain belum memeriksa status login sebelum ditampilkan.
-- Data tersimpan di browser perangkat yang dipakai, tidak tersinkron antar perangkat, dan hilang bila data browser dibersihkan.
-- Pelanggan dikenali berdasarkan kesamaan nama, dan nomor telepon pelanggan baru diisi `-`.
-- Label "Pendapatan Hari Ini" di dashboard menjumlahkan semua transaksi berstatus dibayar, belum difilter tanggal.
-- File `print.css` sudah tersedia, tetapi belum ditautkan di halaman HTML mana pun. Tambahkan `<link rel="stylesheet" href="assets/css/print.css">` setelah `style.css` jika ingin gaya cetaknya aktif.
-````
